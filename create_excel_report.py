@@ -4,7 +4,7 @@ import pandas as pd
 CONFIG = {
     "input_file_path": "input_data.csv",
     "output_file_name": "excel_report.xlsx",
-    "sheet_name": "INWT report",
+    "sheet_name": "Report",
     "column_header_format": {"font": "Open Sans", "size": "11", "font_color": "#2b2b2b", "bold": True},
     "text_format": {
         "font": "Open Sans",
