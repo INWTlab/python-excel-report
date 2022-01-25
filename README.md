@@ -24,3 +24,68 @@ You can configure the Excel file's appearance in the `CONFIG` object at the top 
 - `column_widths`: widths of the columns in the Excel file.
   It's a dictionary where the keys are the column numbers (starting from 0)
   and the values are the respective width.
+
+
+## Extensions
+
+This section describes multiple possible extensions that are not in the script
+for the sake of simplicity.
+
+### Multiheaders
+
+To add a multiheader that spans multiple columns,
+the data must start in row 1 instead of 0, and you can use the `merge_range` method,
+for example:
+
+```python
+import pandas as pd
+
+data = pd.read_csv("input_data.csv")
+writer = pd.ExcelWriter("excel_report.xlsx")
+data.to_excel(writer, index=False, sheet_name="Report", startrow=1)
+sheet_report = writer.sheets["Report"]
+sheet_report.merge_range(first_row=0, last_row=0, first_col=1, last_col=2, data="Company metadata")
+writer.save()
+```
+
+### Multiple sheets
+
+This is how you can create multiple sheets in one file:
+
+```python
+import pandas as pd
+
+data = pd.read_csv("input_data.csv")
+data_2 = data.copy()
+writer = pd.ExcelWriter("excel_report.xlsx")
+data.to_excel(writer, index=False, sheet_name="Report")  # First sheet
+data_2.to_excel(writer, index=False, sheet_name="Just a copy of the other data")  # Second sheet
+writer.save()
+```
+
+
+### Table of content
+
+You can add a first sheet with a table of contents and with links to the respective sheets.
+
+```python
+import pandas as pd
+
+writer = pd.ExcelWriter("excel_report.xlsx")
+workbook = writer.book
+
+# Add table of contents for two sheets
+front_link_dict = {"A2": "Report", "A3": "Just a copy of the other data"}
+sheet_front_page = workbook.add_worksheet("Front Page")
+sheet_front_page.write("A1", "List of contents:")
+for column, sheet_name in front_link_dict.items():
+    sheet_front_page.write_url(column, "internal:{}!A1:A1".format(sheet_name), string=sheet_name)
+
+# Fill the two sheets
+data = pd.read_csv("input_data.csv")
+data_2 = data.copy()
+data.to_excel(writer, index=False, sheet_name="Report")  # First sheet
+data_2.to_excel(writer, index=False, sheet_name="Just a copy of the other data")  # Second sheet
+
+writer.save()
+```
