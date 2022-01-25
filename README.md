@@ -13,7 +13,7 @@ It's sufficient to adapt the `input_file_path` in the `CONFIG` object and then r
 
 ## Configuration
 
-All configuration takes place in the `CONFIG` object at the top of the script.
+You can configure the Excel file's appearance in the `CONFIG` object at the top of the script.
 - `input_file_path`: path to a csv file with your data. 
   The data will be read from this path after the definition of the `CONFIG` object.
   If you want to load the data from any other file than a csv file, also adapt the code that loads the file.
