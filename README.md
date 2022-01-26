@@ -1,6 +1,9 @@
 # python-excel-report
 _Create pretty Excel reports with Python_
 
+![What's the purpose](readme_files/main_feature.png)
+
+
 ## Basic usage
 
 First make sure the following Python packages are installed:
@@ -48,6 +51,8 @@ sheet_report.merge_range(first_row=0, last_row=0, first_col=1, last_col=2, data=
 writer.save()
 ```
 
+![Multiheader](readme_files/multiheader.png)
+
 ### Multiple sheets
 
 This is how you can create multiple sheets in one file:
@@ -63,6 +68,7 @@ data_2.to_excel(writer, index=False, sheet_name="Just a copy of the other data")
 writer.save()
 ```
 
+![Multiple sheets](readme_files/multiple_sheets.png)
 
 ### Table of content
 
@@ -89,3 +95,4 @@ data_2.to_excel(writer, index=False, sheet_name="Just a copy of the other data")
 
 writer.save()
 ```
+![List of contents](readme_files/list_of_contents.png)
