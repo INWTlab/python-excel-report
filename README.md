@@ -3,6 +3,9 @@ _Create pretty Excel reports with Python_
 
 ![What's the purpose](readme_files/main_feature.png)
 
+See also our [blog article](https://www.inwt-statistics.com/read-blog/automated-excel-reports-with-python.html)
+about this topic.
+
 
 ## Basic usage
 
