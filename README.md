@@ -100,3 +100,37 @@ data_2.to_excel(writer, index=False, sheet_name="Just a copy of the other data")
 writer.save()
 ```
 ![List of contents](readme_files/list_of_contents.png)
+
+
+### Linebreaks within cells
+
+You can allow linebreaks ("text wrap") within cells.
+In this case you also need to adapt the row height to ensure the text is fully visible.
+
+```python
+import pandas as pd
+
+data = pd.read_csv("input_data.csv")
+writer = pd.ExcelWriter("excel_report.xlsx")
+workbook = writer.book
+data.to_excel(writer, index=False, sheet_name="Report")  # First sheet
+sheet_report = writer.sheets["Report"]
+
+# Configure linebreaks in the second column
+text_wrap_format = {
+    "font": "Open Sans",
+    "size": "11",
+    "text_wrap": "True",
+}
+text_wrap_format = workbook.add_format(text_wrap_format)
+sheet_report.set_column(first_col=1, last_col=1, cell_format=text_wrap_format)
+
+# Set column heights so we can see all rows
+column_heights = {0: 15, 1: 30, 2: 30, 3: 30}
+for row_index, height in column_heights.items():
+    sheet_report.set_row(row_index, height)
+
+writer.save()
+```
+
+![Linebreaks](readme_files/linebreaks.png)

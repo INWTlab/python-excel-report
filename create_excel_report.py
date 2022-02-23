@@ -10,12 +10,9 @@ CONFIG = {
         "font": "Open Sans",
         "size": "11",
         "font_color": "#2b2b2b",
-        "valign": "top",
     },
-    "column_widths": {0: 6, 1: 12, 2: 12, 3: 16},
+    "column_widths": {0: 6, 1: 16, 2: 12, 3: 16},
     "columns_2_decimal_places": [3],
-    "column_heights": {0: 15, 1: 15, 2: 30, 3: 15},
-    "columns_linebreaks": [1],
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -54,21 +51,12 @@ num_format = workbook.add_format(num_format_2_decimals)
 for col_number in CONFIG["columns_2_decimal_places"]:
     sheet_report.set_column(first_col=col_number, last_col=col_number, cell_format=num_format)
 
-# Allow linebreaks in predefined columns
-text_wrap_format = CONFIG["text_format"].copy()
-text_wrap_format["text_wrap"] = "True"
-text_wrap_format = workbook.add_format(text_wrap_format)
-for col_number in CONFIG["columns_linebreaks"]:
-    sheet_report.set_column(first_col=col_number, last_col=col_number, cell_format=text_wrap_format)
-
 # Freeze header row
 sheet_report.freeze_panes(row=1, col=0)
 
-# Set column widths and heights
+# Set column widths
 for col_index, width in CONFIG["column_widths"].items():
     sheet_report.set_column(col_index, col_index, width)
-for row_index, height in CONFIG["column_heights"].items():
-    sheet_report.set_row(row_index, height)
 
 # Save file
 writer.save()
