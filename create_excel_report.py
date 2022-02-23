@@ -13,6 +13,7 @@ CONFIG = {
         "valign": "top",
     },
     "column_widths": {0: 6, 1: 12, 2: 12, 3: 16},
+    "columns_2_decimal_places": [3],
     "column_heights": {0: 15, 1: 15, 2: 30, 3: 15},
     "columns_linebreaks": [1],
 }
@@ -44,6 +45,14 @@ sheet_report.set_column(first_col=0, last_col=last_col, cell_format=default_text
 column_header_format = workbook.add_format(CONFIG["column_header_format"])
 for col_num, col_name in enumerate(data.columns.values):
     sheet_report.write(0, col_num, col_name, column_header_format)
+
+
+# Format number columns with 2 decimal places
+num_format_2_decimals = CONFIG["text_format"].copy()
+num_format_2_decimals["num_format"] = 0x02
+num_format = workbook.add_format(num_format_2_decimals)
+for col_number in CONFIG["columns_2_decimal_places"]:
+    sheet_report.set_column(first_col=col_number, last_col=col_number, cell_format=num_format)
 
 # Allow linebreaks in predefined columns
 text_wrap_format = CONFIG["text_format"].copy()

@@ -3,6 +3,9 @@ _Create pretty Excel reports with Python_
 
 ![What's the purpose](readme_files/main_feature.png)
 
+See also our [blog article](https://www.inwt-statistics.com/read-blog/automated-excel-reports-with-python.html)
+about this topic.
+
 
 ## Basic usage
 
@@ -27,6 +30,7 @@ You can configure the Excel file's appearance in the `CONFIG` object at the top 
 - `column_widths`: widths of the columns in the Excel file.
   It's a dictionary where the keys are the column numbers (starting from 0)
   and the values are the respective width.
+- `columns_2_decimal_places`: numbers in these columns are always displayed with two decimal places.
 
 
 ## Extensions
